@@ -13,7 +13,7 @@ Este repositório contém um teste para avaliar candidatos para vagas de desenvo
 - Utilizar `computed` e `watch`.
 - Aplicar estilização básica com Tailwind CSS.
 
-### Diferenciais para Pleno:
+### Diferenciais:
 
 - Implementar filtragem e ordenação.
 - Criar um modal para edição da tarefa.
