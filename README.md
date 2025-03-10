@@ -78,3 +78,15 @@ Este teste técnico tem como objetivo avaliar suas habilidades de desenvolviment
 * **Testes (se aplicável):** Os testes cobrem os cenários de teste especificados e são implementados de forma adequada?
 * **Performance:** A aplicação apresenta bom desempenho e otimizações relevantes?
 * **Implementação de Diferenciais:** O candidato implementou diferenciais, demonstrando habilidades adicionais?
+
+## Tempo Estimado
+
+* Não foi definido um tempo para a conclusão do teste, apenas faça e faça da melhor forma que você conseguir! Envie para a gente bem caprichado, pois o carinho do código também será um diferencial para a avaliação.
+
+## Observações
+
+* Utilize a versão mais recente do Node.js e npm.
+* Sinta-se à vontade para utilizar bibliotecas adicionais, desde que justifique o uso.
+* Documente o código de forma clara e concisa.
+* Em caso de dúvidas, entre em contato com alexandre@take5.com.br.
+* Assim que o teste for realizado por favor envie um e-mail para alexandre@take5.com.br informando sua conclusão.
