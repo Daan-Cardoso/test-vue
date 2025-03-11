@@ -7,12 +7,12 @@ Este teste técnico tem como objetivo avaliar suas habilidades de desenvolviment
 ## Requisitos Obrigatórios
 
 1.  **Adição de Tarefas:**
-    - [ ] Implementar um campo de input de texto e um botão "Adicionar".
-    - [ ] Ao clicar no botão, a tarefa digitada no input deve ser adicionada à lista de tarefas.
-    - [ ] O campo de input deve ser limpo após a adição da tarefa.
-    - [ ] Implementar validação para impedir a adição de tarefas vazias.
+    - [x] Implementar um campo de input de texto e um botão "Adicionar".
+    - [x] Ao clicar no botão, a tarefa digitada no input deve ser adicionada à lista de tarefas.
+    - [x] O campo de input deve ser limpo após a adição da tarefa.
+    - [x] Implementar validação para impedir a adição de tarefas vazias.
 2.  **Exibição da Lista de Tarefas:**
-    - [ ] Exibir a lista de tarefas abaixo do campo de input.
+    - [x] Exibir a lista de tarefas abaixo do campo de input.
     - [ ] Cada tarefa deve ser exibida em um item de lista individual.
     - [ ] A lista deve ser ordenada por data de criação (tarefas mais recentes no topo).
     - [ ] Implementar a funcionalidade de excluir tarefas individualmente.
