@@ -13,16 +13,16 @@ Este teste técnico tem como objetivo avaliar suas habilidades de desenvolviment
     - [x] Implementar validação para impedir a adição de tarefas vazias.
 2.  **Exibição da Lista de Tarefas:**
     - [x] Exibir a lista de tarefas abaixo do campo de input.
-    - [ ] Cada tarefa deve ser exibida em um item de lista individual.
-    - [ ] A lista deve ser ordenada por data de criação (tarefas mais recentes no topo).
-    - [ ] Implementar a funcionalidade de excluir tarefas individualmente.
+    - [x] Cada tarefa deve ser exibida em um item de lista individual.
+    - [x] A lista deve ser ordenada por data de criação (tarefas mais recentes no topo).
+    - [x] Implementar a funcionalidade de excluir tarefas individualmente.
 3.  **Marcar Tarefa como Concluída:**
-    - [ ] Implementar um checkbox ao lado de cada tarefa.
-    - [ ] Ao marcar o checkbox, a tarefa deve ser marcada como concluída.
-    - [ ] Aplicar uma estilização visual para tarefas concluídas (por exemplo, riscar o texto).
+    - [x] Implementar um checkbox ao lado de cada tarefa.
+    - [x] Ao marcar o checkbox, a tarefa deve ser marcada como concluída.
+    - [x] Aplicar uma estilização visual para tarefas concluídas (por exemplo, riscar o texto).
 4.  **Persistência de Dados:**
-    - [ ] Utilizar `localStorage` para armazenar as tarefas.
-    - [ ] As tarefas devem ser persistidas mesmo após o fechamento e reabertura do navegador.
+    - [x] Utilizar `localStorage` para armazenar as tarefas.
+    - [x] As tarefas devem ser persistidas mesmo após o fechamento e reabertura do navegador.
 5.  **Uso de `computed` e `watch`:**
     - [ ] Utilizar `computed` para criar uma lista filtrada de tarefas concluídas.
     - [ ] Utilizar `watch` para salvar a lista de tarefas no `localStorage` sempre que a lista for alterada.
