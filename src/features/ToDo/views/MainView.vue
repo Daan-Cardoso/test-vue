@@ -50,12 +50,12 @@
         <Table.Header :columns="(
           [
             { text: 'Status' },
-            { text: 'Tarefa' },
+            { text: 'Tarefa', width: '95%' },
             { text: 'Ações', alignment: 'right' }
           ])"
         />
         <Table.Body>
-          <TransitionGroup name="fade-slide">
+          <TransitionGroup name="fade-slide" :duration="300">
             <Table.Item
               v-for="({ id, text, checked }) in filteredItems"
               :key="id"
@@ -136,11 +136,11 @@ const onDelete = (id: number) => {
 
 .fade-slide-enter-from {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateX(20px);
 }
 
 .fade-slide-leave-to {
   opacity: 0;
-  transform: translateY(-20px);
+  transform: translateX(-20px);
 }
 </style>

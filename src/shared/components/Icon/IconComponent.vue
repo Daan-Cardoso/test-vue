@@ -19,9 +19,9 @@ const icons = import.meta.glob("../../assets/icons/*.svg", { eager: true, as: "r
 
 const props = withDefaults(
   defineProps<{
-    name: string;
-    size?: number;
     customClass?: string;
+    name: string;
+    size?: number | string;
   }>(),
   {
     size: 24,

@@ -1,11 +1,13 @@
 <template>
   <tr class="h-full" :class="[checked ? 'bg-green-200' : 'bg-gray-200']">
-    <td class="p-4 rounded-tl-lg rounded-bl-lg">
-      <input type="checkbox" @change="$emit('check', id)" :checked="checked" />
+    <td class="p-4 rounded-tl-lg rounded-bl-lg max-w-xs">
+      <Form.Checkbox @change="$emit('check', id)" :checked="checked" />
     </td>
 
     <td class="p-4">
-      <span classw-xs="w-xs md:w-lg inline-block" :class="{ 'line-through ' : checked }">{{ text }}</span>
+      <span class="inline-block w-full" :class="{ 'line-through' : checked }">
+        {{ text }}
+      </span>
     </td>
 
     <td class="py-4 px-2 rounded-tr-lg rounded-br-lg">
@@ -28,7 +30,8 @@
 
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
-import Icon from "@/shared/components/Icon/IconComponent.vue";
+import Icon from "@/shared/components/Icon";
+import Form from '@/shared/components/Form';
 
 defineEmits<{
   (event: 'edit', id: number): void;

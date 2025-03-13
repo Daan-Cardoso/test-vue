@@ -2,9 +2,9 @@
   <thead>
     <tr>
       <th
-        v-for="({ text, alignment }, i) in columns" 
+        v-for="({ text, alignment, width }, i) in columns" 
         :key="i"
-        :class="`border-b-2 border-gray-300 p-4 text-${alignment || 'left'}`"
+        :class="`border-b-2 border-gray-300 p-4 text-${alignment || 'left'} w-[${width || 'auto'}]`"
       >
         {{ text }}
       </th>
@@ -14,22 +14,11 @@
 
 <script setup lang="ts">
 
-const getAlignmentClass = (alignment: 'left' | 'right' | 'center') => {
-  switch (alignment) {
-    case 'left':
-      return 'text-left';
-    case 'right':
-      return 'text-right';
-    case 'center':
-      return 'text-center';
-  }
-}
-
 defineProps<{
   columns: {
     text: string;
     alignment?: 'left' | 'right' | 'center';
+    width?: string;
   }[];
 }>()
-
 </script>
