@@ -24,8 +24,8 @@ Este teste técnico tem como objetivo avaliar suas habilidades de desenvolviment
     - [x] Utilizar `localStorage` para armazenar as tarefas.
     - [x] As tarefas devem ser persistidas mesmo após o fechamento e reabertura do navegador.
 5.  **Uso de `computed` e `watch`:**
-    - [ ] Utilizar `computed` para criar uma lista filtrada de tarefas concluídas.
-    - [ ] Utilizar `watch` para salvar a lista de tarefas no `localStorage` sempre que a lista for alterada.
+    - [x] Utilizar `computed` para criar uma lista filtrada de tarefas concluídas.
+    - [x] Utilizar `watch` para salvar a lista de tarefas no `localStorage` sempre que a lista for alterada.
 6.  **Estilização:**
     - [ ] Aplicar estilização básica à aplicação utilizando Tailwind CSS.
     - [ ] A estilização deve ser responsiva, adaptando-se a diferentes tamanhos de tela.
