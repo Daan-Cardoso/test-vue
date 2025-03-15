@@ -27,14 +27,14 @@ Este teste técnico tem como objetivo avaliar suas habilidades de desenvolviment
     - [x] Utilizar `computed` para criar uma lista filtrada de tarefas concluídas.
     - [x] Utilizar `watch` para salvar a lista de tarefas no `localStorage` sempre que a lista for alterada.
 6.  **Estilização:**
-    - [ ] Aplicar estilização básica à aplicação utilizando Tailwind CSS.
-    - [ ] A estilização deve ser responsiva, adaptando-se a diferentes tamanhos de tela.
-    - [ ] Criar um layout básico para a aplicação, com boa organização visual.
+    - [x] Aplicar estilização básica à aplicação utilizando Tailwind CSS.
+    - [x] A estilização deve ser responsiva, adaptando-se a diferentes tamanhos de tela.
+    - [x] Criar um layout básico para a aplicação, com boa organização visual.
 
 ## Diferenciais (Opcionais, mas valorizados)
 
 * **Nível Básico:**
-    - [ ] Implementar filtragem por tarefas concluídas/pendentes.
+    - [x] Implementar filtragem por tarefas concluídas/pendentes.
     - [ ] Implementar ordenação por data de conclusão.
 * **Nível Intermediário:**
     - [ ] Criar um modal para edição do texto da tarefa.

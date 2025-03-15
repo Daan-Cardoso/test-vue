@@ -13,16 +13,16 @@
         border
         border-gray-300
         flex
-        h-8
         items-center
         justify-center
+        md:size-8
         rounded-full
-        w-8
+        size-6
       "
       @click="$emit('update:checked', !checked)"
     >
       <Transition name="fade">
-        <Icon name="check" size="24" class="text-green-500" v-if="checked" />
+        <Icon name="check" class="text-green-500 size-5" v-if="checked" />
       </Transition>
     </span>
 

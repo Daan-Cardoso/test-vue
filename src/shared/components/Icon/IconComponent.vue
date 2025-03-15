@@ -2,13 +2,8 @@
   <span
     v-if="iconContent"
     v-html="iconContent"
-    class="icon"
+    class="icon inline-flex items-center justify-center"
     :class="customClass"
-    :style="{
-      width: `${size}px`,
-      height: `${size}px`,
-      display: 'inline-block',
-    }"
   />
 </template>
 
@@ -17,22 +12,19 @@ import { computed } from "vue";
 
 const icons = import.meta.glob("../../assets/icons/*.svg", { eager: true, as: "raw" });
 
-const props = withDefaults(
+const props = 
   defineProps<{
     customClass?: string;
+    iconClass?: string;
     name: string;
-    size?: number | string;
-  }>(),
-  {
-    size: 24,
-  }
-);
+  }>();
 
 const iconContent = computed(() => {
-  return icons[`../../assets/icons/${props.name}.svg`] || "";
+  let rawSvg = icons[`../../assets/icons/${props.name}.svg`] || "";
+
+  if (rawSvg)
+    rawSvg = rawSvg.replace(/<svg([^>]+)>/, `<svg$1 class="block mx-auto ${props.iconClass || ""}">`);
+
+  return rawSvg;
 });
 </script>
-
-<style scoped>
-
-</style>
