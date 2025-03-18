@@ -2,6 +2,7 @@
   <button class="
     bg-indigo-600
     border-transparent
+    cursor-pointer
     font-medium
     hover:bg-indigo-700
     inline-block

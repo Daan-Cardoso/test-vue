@@ -1,6 +1,6 @@
 <template>
   <tr
-    class="h-full text-gray-700 text-sm md:text-base"
+    class="h-full text-gray-700 text-xs md:text-base"
     :class="[checked ? 'bg-green-200' : 'bg-gray-200']"
   >
     <td class="
@@ -9,7 +9,7 @@
       rounded-bl-lg
       rounded-tl-lg
     ">
-      <Form.Checkbox @change="$emit('check', id)" :checked="checked" />
+      <Form.Checkbox @change.prevent.stop="$emit('check', id)" :checked="checked" />
     </td>
 
     <td class="p-2 md:p-4">
@@ -20,31 +20,31 @@
 
     <td class="p-2 md:p-4">
       <span class="inline-block w-full">
-        <!-- {{ formatDate(finished_at) }} -->
-        {{ finished_at }}
+        {{ formatDate(finished_at) }}
       </span>
     </td>
 
-    <td class="p-2 md:py-4 px-2 rounded-tr-lg rounded-br-lg">
+    <td class="py-2 md:py-4 px-1 rounded-tr-lg rounded-br-lg">
       <Icon
         name="pencil-square"
         custom-class="
-          block
+          inline-block
           cursor-pointer
           hover:text-gray-400
+          md:mr-2
           md:size-6
-          mr-2
+          mr-1
           size-4
           text-gray-600
         "
         icon-class="w-full"
-        @click="$emit('edit', id)"
+        @click.prevent.stop="$emit('edit', id)"
       />
 
       <Icon
         name="trash"
         custom-class="
-          block
+          inline-block
           cursor-pointer
           hover:text-red-400
           md:size-6
@@ -52,14 +52,13 @@
           text-red-600
         "
         icon-class="w-full"
-        @click="$emit('delete', id)"
+        @click.prevent.stop="$emit('delete', id)"
       />
     </td>
   </tr>
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
 import Icon from "@/shared/components/Icon";
 import Form from '@/shared/components/Form';
 import moment from 'moment';
@@ -78,6 +77,7 @@ defineProps<{
 }>()
 
 const formatDate = (date: string) => {
+  if (!date) return '';
   return moment(date, "DD/MM/YYYY HH:mm:ss").format("DD/MM/YYYY");
 }
 

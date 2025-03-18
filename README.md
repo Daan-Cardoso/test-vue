@@ -35,16 +35,16 @@ Este teste técnico tem como objetivo avaliar suas habilidades de desenvolviment
 
 * **Nível Básico:**
     - [x] Implementar filtragem por tarefas concluídas/pendentes.
-    - [ ] Implementar ordenação por data de conclusão.
+    - [x] Implementar ordenação por data de conclusão.
 * **Nível Intermediário:**
-    - [ ] Criar um modal para edição do texto da tarefa.
+    - [x] Criar um modal para edição do texto da tarefa.
     - [ ] Implementar autenticação fake com um formulário de login simples.
     - [ ] Proteger rotas da aplicação, permitindo acesso apenas a usuários autenticados (utilizando Vue Router).
 * **Nível Avançado:**
-    - [ ] Utilizar `async setup` e Composition API para buscar tarefas de uma API externa (simulada).
-    - [ ] Implementar testes e2e com Cypress para os principais cenários de uso.
-    - [ ] Otimizar a performance da aplicação com lazy loading de imagens (se aplicável) e debounce na pesquisa de tarefas.
-    - [ ] Implementar atualizações em tempo real da lista de tarefas utilizando WebSockets ou polling (simulando um backend).
+    - [x] Utilizar `async setup` e Composition API para buscar tarefas de uma API externa (simulada).
+    - [x] Implementar testes e2e com Cypress para os principais cenários de uso.
+    - [x] Otimizar a performance da aplicação com lazy loading de imagens (se aplicável) e debounce na pesquisa de tarefas.
+    - [x] Implementar atualizações em tempo real da lista de tarefas utilizando WebSockets ou polling (simulando um backend).
 
 ## Instruções de Execução
 

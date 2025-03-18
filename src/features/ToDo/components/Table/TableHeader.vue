@@ -5,7 +5,7 @@
         v-for="({ text, alignment, colspan, sortable, sortKey }, i) in columns"
         :key="i"
         :class="[
-          'border-b-2 border-gray-300 p-2 md:p-4',
+          'border-b-2 border-gray-300 p-2 md:p-4 text-xs md:text-base',
           alignmentClass(alignment)
         ]"
         :style="{ width: colspan,  }"
@@ -20,7 +20,6 @@
             cursor-pointer
             hover:text-gray-400
             md:size-4
-            mr-2
             size-4
             text-gray-600
             ${order === 'desc' ? 'transform rotate-180' : ''}
@@ -35,8 +34,7 @@
 
 <script setup lang="ts">
 import Icon from '@/shared/components/Icon';
-import { defineEmits } from 'vue';
-import type { tItem } from './types';
+import type { tItem } from '../../types';
 
 defineProps<{
   order?: 'asc' | 'desc';

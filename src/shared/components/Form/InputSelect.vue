@@ -39,8 +39,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
-
 const emit = defineEmits(['update:modelValue']);
 
 defineProps<{

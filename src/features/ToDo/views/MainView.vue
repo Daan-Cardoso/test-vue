@@ -1,6 +1,5 @@
 <template>
-  <div class="@container p-4 md:p-10">
-
+  <div class="@container p-4 md:p-10 relative">
     <header class="flex flex-col md:flex-row align-center gap-4 md:h-12">
       <Form.Input
         v-model="input"
@@ -12,7 +11,7 @@
       <Form.Button
         custom-class="w-full md:w-auto md:h-full"
         text="Adicionar"
-        @click="add"
+        @click="onAdd"
       />
     </header>
 
@@ -37,23 +36,24 @@
           :columns="(
           [
             { text: 'Status', colspan: '5%' },
-            { text: 'Tarefa', colspan: '70%', alignment: 'left' },
-            { text: 'Finalizado em', colspan: '25%', alignment: 'left', sortable: true, sortKey: 'finished_at' },
+            { text: 'Tarefa', colspan: '50%', alignment: 'left' },
+            { text: 'Finalizado em', colspan: '45%', alignment: 'left', sortable: true, sortKey: 'finished_at' },
             { text: 'Ações', alignment: 'right' }
           ])"
           :order
         />
 
         <Table.Body>
-          <TransitionGroup name="fade-slide" :duration="200">
+          <TransitionGroup name="fade-slide" :duration="300">
             <Table.Item
               v-for="({ id, text, checked, finished_at }) in filteredItems"
-              v-if="filteredItems.length"
+              v-if="![].length"
               :key="id"
               :id
               :text
               :checked
               :finished_at
+              @edit="isEditModalOpen = true"
               @delete="onDelete"
               @check="onCheck"
             />
@@ -62,39 +62,82 @@
 
       </Table.Root>
     </div>
+
+    <Modal
+      :open="isEditModalOpen"
+      @close="isEditModalOpen = false"
+      title="Editar tarefa"
+      v-if="isEditModalOpen"
+    >
+      <div class="flex flex-col md:flex-row align-center gap-4">
+        <Form.Input
+          v-model="input"
+          required
+          placeholder="Descrição da tarefa"
+          maxlength="256"
+          class="w-full md:h-full"
+          label="Descrição"
+          error-message="teste"
+        />
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script setup lang="ts">
-import Table from '../components/Table'
 import Form from '@/shared/components/Form'
-import type { tItem } from '../components/Table/types'
+import Modal from '@/shared/components/Modal'
+import Table from '../components/Table'
 import moment from 'moment'
-import { computed, ref } from 'vue'
+import type { tItem } from '@/features/ToDo/types'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useLocalStorage } from '@/shared/hooks/useLocalStorage'
+import { useWebSocket } from '@/features/ToDo/hooks/useWebsocket'
+import services from '@/features/ToDo/services'
 
 const input = ref<string>('')
 const filterByStatus = ref<string>('')
 const order = ref<'asc' | 'desc' | undefined>()
 const orderBy = ref<keyof tItem>()
+const isEditModalOpen = ref(false)
 
-const todo = useLocalStorage('todo', [])
+const { isConnected, messages, sendMessage, connect } = useWebSocket("ws://localhost:3000");
 
-const items = ref<tItem[]>(todo.data.value)
+const { data: todo, setItem: updateTasks } = useLocalStorage('todo', [])
+const items = ref<tItem[]>(todo.value)
+
+onMounted(() => {
+  connect();
+});
+
+watch(isConnected, (connected) => {
+  if (connected) {
+    sendMessage({ type: "fetchTasks" });
+  }
+});
+
+watch(messages.value, (newMessages) => {
+  if (newMessages.length > 0) {
+    const lastMessage = newMessages[newMessages.length - 1];
+
+    if (lastMessage.type === "tasks") {
+      items.value = lastMessage.data;
+      updateTasks(lastMessage.data)
+    }
+  }
+});
 
 const filteredItems = computed(() => {
-  return items.value
-    .filter((item) => {
+  return items?.value?.filter((item) => {
       const status = item.checked ? 'Concluído' : 'Pendente'
 
       return status === filterByStatus.value || filterByStatus.value === 'Todos' || !filterByStatus.value
-    })
-    .sort((a, b) => {
+    })?.sort((a, b) => {
       if (orderBy.value && orderBy.value === 'finished_at') {
         if (b.finished_at === '') return -1
         if (a.finished_at === '') return 1
-        if (order.value === 'asc') return moment(b.finished_at, 'DD/MM/YYYY HH:mm:ss').diff(moment(a.finished_at, 'DD/MM/YYYY HH:mm:ss'))
-        if (order.value === 'desc') return moment(a.finished_at, 'DD/MM/YYYY HH:mm:ss').diff(moment(b.finished_at, 'DD/MM/YYYY HH:mm:ss'))
+        if (order.value === 'asc') return moment(a.finished_at, 'DD/MM/YYYY HH:mm:ss').diff(moment(b.finished_at, 'DD/MM/YYYY HH:mm:ss'))
+        if (order.value === 'desc') return moment(b.finished_at, 'DD/MM/YYYY HH:mm:ss').diff(moment(a.finished_at, 'DD/MM/YYYY HH:mm:ss'))
 
         return moment(b.finished_at, 'DD/MM/YYYY HH:mm:ss').diff(moment(a.finished_at, 'DD/MM/YYYY HH:mm:ss'))
       }
@@ -102,35 +145,43 @@ const filteredItems = computed(() => {
     })
 })
 
-const add = () => {
+const onAdd = async () => {
   if (!input.value) return window.alert('Campo obrigatório')
 
-  items.value.push({
-    id: moment().valueOf(), 
-    text: input.value, 
-    created_at: moment().format('DD/MM/YYYY HH:mm:ss'), 
+  const item = {
+    id: moment().valueOf(),
+    text: input.value,
+    created_at: moment().format('DD/MM/YYYY HH:mm:ss'),
     checked: false,
     finished_at: '',
-  })
+  }
 
   input.value = ''
+
+  await services.addTask(item)
+    .catch(error => console.error(error))
 }
 
-const onCheck = (id: number) => {
+const onCheck = async (id: number) => {
+
   const item = items.value.find((item) => item.id === id)
 
   if (!item) return
 
   item.checked = !item.checked
   item.finished_at = item.checked ? moment().format('DD/MM/YYYY HH:mm:ss') : ''
+
+  await services.updateStatus(id, item.checked)
+    .catch(error => console.error(error))
 }
 
-const onDelete = (id: number) => {
+const onDelete = async (id: number) => {
   const index = items.value.findIndex((item) => item.id === id)
 
   if (index === -1) return
 
-  items.value.splice(index, 1)
+  await services.deleteTask(id)
+    .catch(error => console.error(error))
 }
 
 const onSort = (sortKey?: keyof tItem) => {
@@ -147,6 +198,15 @@ const onSort = (sortKey?: keyof tItem) => {
     default:
       order.value = 'asc'
   }
+}
+
+const onEdit = (id: number) => {
+  const item = items.value.find((item) => item.id === id)
+
+  if (!item) return
+
+  input.value = item.text
+  isEditModalOpen.value = true
 }
 </script>
 
