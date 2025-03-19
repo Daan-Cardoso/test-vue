@@ -1,33 +1,47 @@
 <template>
-  <label class="flex flex-col gap-1">
-    <span class="text-xs md:text-base text-gray-700 font-bold pb-1 block" v-if="label">
+  <label class="flex flex-col gap-1 w-full">
+    <span
+      class="
+        block
+        font-bold
+        md:text-base
+        pb-1
+        text-gray-700
+        text-xs
+      "
+      v-if="label"
+    >
       {{ label }} <span class="text-red-400" v-if="required">*</span>
     </span>
 
-    <input type="text" class="
-      block
-      border-gray-200
-      border-2
-      focus:border-indigo-500
-      focus:outline-none
-      focus:ring-2
-      focus:ring-indigo-500
-      h-full
-      px-4
-      py-2
-      rounded-md
-      shadow-sm 
-      text-gray-700
-      w-full
-    "
-    :placeholder
-    :maxlength
-    :required
-    :disabled
-    :readonly
-    :class="[customClass, errorClass]"
-    @input="onInput"
-    :value="modelValue"
+    <input
+      :type
+      class="
+        bg-white
+        block
+        border-2
+        border-gray-200
+        focus:border-indigo-500
+        focus:outline-none
+        focus:ring-2
+        focus:ring-indigo-500
+        h-full
+        px-4
+        py-2
+        rounded-md
+        shadow-sm 
+        text-gray-700
+        w-full
+      "
+      :name
+      :placeholder
+      :maxlength
+      :disabled
+      :required
+      :readonly
+      :class="[customClass, errorClass]"
+      @input="onInput"
+      :value="modelValue"
     />
 
     <span class="text-xs md:text-base text-red-400 block p-1" v-if="errorMessage">
@@ -50,6 +64,7 @@ const props = defineProps<{
   required?: boolean;
   disabled?: boolean;
   readonly?: boolean;
+  name?: string;
 }>();
 
 const emit = defineEmits(['update:modelValue']);

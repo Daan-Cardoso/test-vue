@@ -33,7 +33,7 @@ const addTask = async (payload: tItem) => {
 }
 
 const editTask = async (payload: tItem) => {
-  const response = await api.post(`/tasks/${payload.id}` , payload)
+  const response = await api.patch(`/tasks/${payload.id}`, payload)
 
   return response
 }

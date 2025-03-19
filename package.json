@@ -13,7 +13,9 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.12",
+    "@types/base-64": "^1.0.2",
     "axios": "^1.8.3",
+    "base-64": "^1.0.0",
     "cors": "^2.8.5",
     "express": "4.21.2",
     "fs": "^0.0.1-security",
@@ -21,6 +23,7 @@
     "path": "^0.12.7",
     "tailwindcss": "^4.0.12",
     "vue": "^3.5.13",
+    "vue-router": "4",
     "ws": "^8.18.1"
   },
   "devDependencies": {

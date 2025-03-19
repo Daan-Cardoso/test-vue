@@ -53,7 +53,7 @@
               :text
               :checked
               :finished_at
-              @edit="isEditModalOpen = true"
+              @edit="handleEdit"
               @delete="onDelete"
               @check="onCheck"
             />
@@ -68,16 +68,15 @@
       @close="isEditModalOpen = false"
       title="Editar tarefa"
       v-if="isEditModalOpen"
+      @confirm="onEdit"
     >
       <div class="flex flex-col md:flex-row align-center gap-4">
         <Form.Input
-          v-model="input"
+          v-model="itemToEdit.text"
           required
           placeholder="Descrição da tarefa"
           maxlength="256"
           class="w-full md:h-full"
-          label="Descrição"
-          error-message="teste"
         />
       </div>
     </Modal>
@@ -90,7 +89,7 @@ import Modal from '@/shared/components/Modal'
 import Table from '../components/Table'
 import moment from 'moment'
 import type { tItem } from '@/features/ToDo/types'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { useLocalStorage } from '@/shared/hooks/useLocalStorage'
 import { useWebSocket } from '@/features/ToDo/hooks/useWebsocket'
 import services from '@/features/ToDo/services'
@@ -100,6 +99,7 @@ const filterByStatus = ref<string>('')
 const order = ref<'asc' | 'desc' | undefined>()
 const orderBy = ref<keyof tItem>()
 const isEditModalOpen = ref(false)
+const itemToEdit = ref<tItem>({ id: 0, text: '', checked: false, created_at: '', finished_at: '' })
 
 const { isConnected, messages, sendMessage, connect } = useWebSocket("ws://localhost:3000");
 
@@ -200,13 +200,26 @@ const onSort = (sortKey?: keyof tItem) => {
   }
 }
 
-const onEdit = (id: number) => {
+const handleEdit = (id: number) => {
   const item = items.value.find((item) => item.id === id)
 
   if (!item) return
 
-  input.value = item.text
+  itemToEdit.value = item
   isEditModalOpen.value = true
+}
+
+const onEdit = async () => {
+  const item = itemToEdit.value
+
+  if (!item) return
+
+  await services.editTask(item).then(() => {
+    isEditModalOpen.value = false
+    itemToEdit.value = { id: 0, text: '', checked: false, created_at: '', finished_at: '' }
+  }).catch(error => console.error(error))
+
+  isEditModalOpen.value = false
 }
 </script>
 
