@@ -57,7 +57,7 @@
       <div class="w-full flex justify-end">
         <Form.Button
           text="Entrar"
-          custom-class="w-[70px]"
+          custom-class="w-[30%]"
         />
       </div>
     </form>

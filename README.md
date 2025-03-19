@@ -70,6 +70,17 @@ Este teste técnico tem como objetivo avaliar suas habilidades de desenvolviment
 
     O servidor local será iniciado e a aplicação poderá ser acessada em `http://localhost:5173`.
 
+5.  Em outro console rode a micro-api*:
+    ```bash
+    cd micro-api
+    npm install
+    npm run start
+    ```
+
+    A api será iniciada possibilitando a conexão com o websocket e poderá ser requisitada em `http://localhost:3000`
+
+    *Ps: Quando a api é requisitada em qualquer endpoint, por estar dentro do mesmo diretorio do projeto ele força uma atualização na página, eu desenvolvi a api apenas para esse teste, então mantive dentro do diretorio
+
 ## Critérios de Avaliação
 
 * **Funcionalidade:** A aplicação atende a todos os requisitos obrigatórios?
